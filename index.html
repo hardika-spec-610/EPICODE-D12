@@ -74,6 +74,7 @@
           type="text"
           id="input-field"
           placeholder="input field for the exercise"
+          onkeyup="onItemClick(event)"
         />
       </div>
     </div>
@@ -219,10 +220,11 @@
       */
 
       const inputField = document.getElementById("input-field");
-      inputField.addEventListener("keyup", onItemClick);
+      // inputField.addEventListener("keyup", onItemClick);
+
       function onItemClick(eventData) {
-        let clickedItem = eventData.target;
-        console.log(clickedItem);
+        let clickedItem = inputField.value;
+        console.log(eventData.key);
       }
       /* EXERCISE 12
        Create a welcome alert message when the page successfully loads.

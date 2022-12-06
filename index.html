@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .myHeading {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <button type="button" onclick="changeTitle('This is my title')">
+      Change Title of Page
+    </button>
+    <button type="button" onclick="addClassToTitle()">
+      Change title class
+    </button>
+    <button
+      type="button"
+      onclick="changePcontent('Lorem ipsum dolor sit amet consectetur adipisicing elit. ')"
+    >
+      Change paragraph content
+    </button>
+    <button type="button" onclick="changeUrls('This link goes to google.com')">
+      Change url
+    </button>
+    <button type="button" onclick="addToTheSecond('4th')">Add List Item</button>
+
+    <button
+      type="button"
+      onclick="addParagraph('Lorem ipsum dolor sit amet consectetur adipisicing elit. Error accusantium nobis explicabo')"
+    >
+      Add paragraph
+    </button>
+    <button type="button" onclick="firstUlDisappear()">
+      first unorderd list disapper
+    </button>
+    <button type="button" onclick="paintItGreen()">unorderd list green</button>
+    <button type="button" onclick="makeItClickable()">colorful heading</button>
+
+    <div>
+      <h1 id="main-title">This is the title of the page</h1>
+      <h2>This is the subtitle of the page</h2>
+    </div>
+
+    <div>
+      <hr />
+
+      <ul id="firstList">
+        <li>1st UL</li>
+        <li>2nd</li>
+        <li>3rd</li>
+      </ul>
+
+      <ul id="secondList">
+        <li>1st</li>
+        <li>2nd</li>
+        <li>3rd</li>
+      </ul>
+
+      <a id="strive-link" href="strive.school"
+        >This link goes to Strive School</a
+      >
+
+      <div id="first-div" class="paragraph-div">
+        <p>This text is just for the exercise</p>
+      </div>
+
+      <div>
+        <input
+          type="text"
+          id="input-field"
+          placeholder="input field for the exercise"
+        />
+      </div>
+    </div>
+
+    <div class="paragraph-div">
+      <p>And this text is just for the exercise too!</p>
+      <h2 id="footer-text" style="color: red" onclick="changeFooterText()">
+        Save this page on your computer and open it with VSCode to get the
+        questions!
+      </h2>
+    </div>
+    <script>
+      /* EXERCISE 1
+       Write a function for changing the title of the document in something else.
+      */
+
+      const changeTitle = function (newTitle) {
+        let h1Node = document.getElementById("main-title");
+        h1Node.innerText = newTitle;
+      };
+
+      /* EXERCISE 2
+       Write a function for changing the class of the title of the page in "myHeading".
+      */
+
+      const addClassToTitle = function () {
+        let classAddToH1 = document.getElementById("main-title");
+        classAddToH1.classList.add("myHeading");
+      };
+
+      /* EXERCISE 3
+       Write a function for changing the text of only the p which are children of a div.
+      */
+
+      const changePcontent = function (content) {
+        let childNode = document.querySelectorAll("div > p");
+        console.log(childNode);
+        for (let i = 0; i < childNode.length; i++) {
+          let changedText = childNode[i];
+          childNode[i].innerText = content;
+        }
+        // let childNode = document.getElementsByClassName("paragraph-div");
+        // for (let i = 0; i < childNode.length; i++) {
+        //   let collection = childNode[i];
+        //   let childrens = collection.children;
+        //   for (let j = 0; j < childrens.length; j++) {
+        //     let childrenItem = childrens[j];
+        //     if (childrenItem.nodeName === "p") {
+        //       console.log(childrenItem);
+        //     }
+        //   }
+        // }
+      };
+
+      /* EXERCISE 4
+       Write a function for changing the href property of every link to https://www.google.com
+      */
+
+      const changeUrls = function (newUrl) {
+        let aTagNode = document.getElementById("strive-link");
+        aTagNode.setAttribute("href", "https://www.google.com");
+        aTagNode.innerText = newUrl;
+      };
+
+      /* EXERCISE 5
+       Write a function for adding a new list item in the second unordered list.
+      */
+
+      const addToTheSecond = function (content) {
+        // let secondUlNode = document.getElementById("secondList");
+        // let li = document.createElement("li");
+        // li.textContent = content;
+        // secondUlNode.appendChild(li);
+        const node = document.createElement("li");
+        const textnode = document.createTextNode(content);
+        node.appendChild(textnode);
+        document.getElementById("secondList").appendChild(node);
+      };
+
+      /* EXERCISE 6
+       Write a function for adding a second paragraph to the first div.
+      */
+
+      const addParagraph = function (content) {
+        let addParaNode = document.getElementById("first-div");
+        let p = document.createElement("p");
+        p.textContent = content;
+        addParaNode.appendChild(p);
+      };
+
+      /* EXERCISE 7
+       Write a function for making the first unordered list disappear.
+      */
+
+      const firstUlDisappear = function () {
+        let firstUlNode = document.getElementById("firstList");
+        firstUlNode.style.display = "none";
+      };
+
+      /* EXERCISE 8
+       Write a function for making the background of every unordered list green.
+      */
+
+      const paintItGreen = function () {
+        let ulNode = document.getElementsByTagName("ul");
+        for (let i = 0; i < ulNode.length; i++) {
+          let ulItem = ulNode[i];
+          ulItem.style.backgroundColor = "green";
+        }
+      };
+
+      /* EXERCISE 9
+       Make the heading of the page change color every time the user clicks on it.
+      */
+
+      const makeItClickable = function () {
+        let colorfulTitle = document.getElementById("main-title");
+        let colors = [
+          "red",
+          "green",
+          "yellow",
+          "blue",
+          "orange",
+          "aquamarine",
+          "blueviolet",
+        ];
+        let randomColor = colors[Math.floor(Math.random() * 8)];
+        colorfulTitle.style.color = randomColor;
+      };
+
+      /* EXERCISE 10
+       Change the footer text with something else when the user clicks on it.
+      */
+
+      const changeFooterText = function () {
+        let ftrH2Node = document.getElementById("footer-text");
+        ftrH2Node.textContent = "I saved this page on my computer";
+      };
+
+      /* EXERCISE 11
+       Attach an event listener to the input field in the page for console logging its 
+       value just after any keystroke.
+      */
+
+      const inputField = document.getElementById("input-field");
+      inputField.addEventListener("keyup", onItemClick);
+      function onItemClick(eventData) {
+        let clickedItem = eventData.target;
+        console.log(clickedItem);
+      }
+      /* EXERCISE 12
+       Create a welcome alert message when the page successfully loads.
+      */
+
+      window.onload = function () {
+        alert("welcome");
+      };
+      /* EXERCISE 13
+       Use HTML5 tags to properly provide semantic meaning to the different portions of the page.
+      */
+    </script>
+  </body>
+</html>
